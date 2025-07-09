@@ -20,7 +20,7 @@ namespace CladSmartTest.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Employee()
         {
             ViewBag.Message = "Your contact page.";
 
