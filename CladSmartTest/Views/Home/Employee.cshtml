@@ -1,26 +1,68 @@
 ﻿@{
     ViewBag.Title = "Employee";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
 
-    <table>
-        
-      
-        @foreach(var emp in @ViewBag.Employees)
+
+<main>
+    <table id="myTable" class="display" width="100%">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>NIK</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var emp in @ViewBag.Employees)
             {
+
                 <tr>
-                    <thead>test</thead>
+                    <td>1</td>
+                    <td>@emp.nik</td>
+                    <td>@emp.name</td>
+                    <td>@emp.department.department_name</td>
+                    <td>@emp.position</td>
                     <td>
-                        Test @emp.nik
+                        @Html.ActionLink("Edit", "Edit", new { nik = emp.nik })
+                        @Html.ActionLink("Delete", "Delete", new { nik = emp.nik })
                     </td>
                 </tr>
             }
+
+        </tbody>
     </table>
+
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Row 1 Data 1</td>
+                <td>Row 1 Data 2</td>
+            </tr>
+            <tr>
+                <td>Row 2 Data 1</td>
+                <td>Row 2 Data 2</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
+
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+
+
 </main>
+
+
+

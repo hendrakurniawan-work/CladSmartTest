@@ -66,8 +66,6 @@ namespace CladSmartTest.Controllers
                 employeeList.Add(emp); 
             }
 
-
-
             // Pass the employee data to the view  
             ViewBag.Employees = employeeList;
 
