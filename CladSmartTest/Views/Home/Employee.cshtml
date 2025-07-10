@@ -1,11 +1,12 @@
 ﻿@{
     ViewBag.Title = "Employee";
+    int count = 1;
 }
 
 
 
 <main>
-    <table id="employeeTable" class="display" width="100%">
+    <table id="employeeTable" class="display table-bordered table-striped" width="100%">
         <thead>
             <tr>
                 <th>No</th>
@@ -21,18 +22,18 @@
 
             @foreach (var emp in @ViewBag.Employees)
             {
-
                 <tr>
-                    <td>1</td>
+                    <td>@count</td>
                     <td>@emp.nik</td>
                     <td>@emp.name</td>
                     <td>@emp.department.department_name</td>
                     <td>@emp.position</td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { nik = emp.nik })
-                        @Html.ActionLink("Delete", "Delete", new { nik = emp.nik })
+                        @Html.ActionLink("Edit", "Edit", new { id = emp.nik })
+                        @Html.ActionLink("Delete", "Delete", new { id = emp.nik })
                     </td>
                 </tr>
+                count++;
             }
 
         </tbody>
