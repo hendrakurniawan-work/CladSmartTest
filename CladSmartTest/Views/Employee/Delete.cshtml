@@ -1,0 +1,72 @@
+﻿@model CladSmartTest.DataLayer.employee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bpjs_allowance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bpjs_allowance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.meal_allowance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.meal_allowance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.laptop_allowance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.laptop_allowance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.department.department_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.department.department_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

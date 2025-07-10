@@ -1,0 +1,78 @@
+﻿@model IEnumerable<CladSmartTest.DataLayer.employee>
+
+@{
+    ViewBag.Title = "List of Employee Data";
+    int count = 1;
+}
+
+<h2>List of Employee Data</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary" })
+</p>
+<table id="employeeTable" class="display table-bordered">
+    <thead>
+        <tr>
+            <th>
+                No
+            </th>
+            <th>
+                NIK
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Position
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@count</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.department.department_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.position)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.nik }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.nik }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+            count++;
+        }
+
+
+    </tbody>
+
+</table>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
+
+@section scripts{
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+
+    <script>
+            $(document).ready(function () {
+                $('#employeeTable').DataTable();
+            });
+    </script>
+    }
