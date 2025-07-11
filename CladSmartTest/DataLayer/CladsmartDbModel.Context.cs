@@ -27,5 +27,6 @@ namespace CladSmartTest.DataLayer
     
         public virtual DbSet<department> departments { get; set; }
         public virtual DbSet<employee> employees { get; set; }
+        public virtual DbSet<overtime> overtimes { get; set; }
     }
 }

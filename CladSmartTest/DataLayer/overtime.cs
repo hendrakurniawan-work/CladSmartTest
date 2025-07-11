@@ -11,19 +11,19 @@ namespace CladSmartTest.DataLayer
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class department
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class overtime
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public department()
-        {
-            this.employees = new HashSet<employee>();
-        }
-    
         public long id { get; set; }
-        public string department_name { get; set; }
+        public long employee_nik { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime start_date_time { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime end_date_time { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee> employees { get; set; }
+        public virtual employee employee { get; set; }
     }
 }

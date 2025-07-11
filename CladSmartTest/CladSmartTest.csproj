@@ -120,9 +120,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OvertimeController.cs" />
     <Compile Include="DataLayer\CladsmartDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,6 +142,9 @@
       <DependentUpon>CladsmartDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\employee.cs">
+      <DependentUpon>CladsmartDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\overtime.cs">
       <DependentUpon>CladsmartDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -179,6 +182,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="DataLayer\CladsmartDbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CladsmartDbModel.Designer.cs</LastGenOutput>
@@ -186,12 +195,6 @@
     <Content Include="DataLayer\CladsmartDbModel.edmx.diagram">
       <DependentUpon>CladsmartDbModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -215,16 +218,14 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Department\Create.cshtml" />
-    <Content Include="Views\Department\Delete.cshtml" />
-    <Content Include="Views\Department\Details.cshtml" />
-    <Content Include="Views\Department\Edit.cshtml" />
-    <Content Include="Views\Department\Index.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Employee\Delete.cshtml" />
-    <Content Include="Views\Employee\Details.cshtml" />
-    <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Overtime\Create.cshtml" />
+    <Content Include="Views\Overtime\Delete.cshtml" />
+    <Content Include="Views\Overtime\Edit.cshtml" />
+    <Content Include="Views\Overtime\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

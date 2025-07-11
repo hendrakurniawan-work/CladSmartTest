@@ -1,31 +1,30 @@
 ﻿@model IEnumerable<CladSmartTest.DataLayer.employee>
 
 @{
-    ViewBag.Title = "List of Employee Data";
     int count = 1;
 }
 
-<h2>List of Employee Data</h2>
+<h2>LIST OF EMPLOYEE DATA</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary" })
+<p class="d-flex justify-content-end">
+    @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary " })
 </p>
-<table id="employeeTable" class="display table-bordered">
+<table id="employeeTable" class="display table-bordered text-center">
     <thead>
-        <tr>
-            <th>
+        <tr class="text-center">
+            <th class="text-center">
                 No
             </th>
-            <th>
+            <th class="text-center">
                 NIK
             </th>
-            <th>
+            <th class="text-center">
                 Name
             </th>
-            <th>
+            <th class="text-center">
                 Department
             </th>
-            <th>
+            <th class="text-center">
                 Position
             </th>
             <th>
@@ -38,8 +37,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@count</td>
-                <td>
+                <td class="text-center">
+                    @count
+                </td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.nik)
                 </td>
                 <td>

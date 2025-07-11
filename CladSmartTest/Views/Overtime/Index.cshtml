@@ -1,0 +1,112 @@
+﻿@model IEnumerable<CladSmartTest.DataLayer.overtime>
+
+@{
+    int count = 1;
+}
+
+<h2>LIST OF THE OVER TIME DATA</h2>
+
+<p class="d-flex justify-content-end">
+    @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary " })
+</p>
+<table id="overtimeTable" class="display table-bordered text-center">
+    <thead>
+
+        <tr>
+            <th class="text-center">
+                No
+            </th>
+            <th class="text-center">
+                NIK
+            </th>
+            <th class="text-center">
+                Time Start
+            </th>
+            <th class="text-center">
+                Time Finish
+            </th>
+            <th class="text-center">
+                Actual Hours
+            </th>
+            <th class="text-center">
+                Calculated Hours
+            </th>
+            <th class="text-center">
+                Action
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @count
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.employee.nik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.start_date_time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.end_date_time)
+                </td>
+                <td class="text-center">
+                    @{
+                        var diff = item.end_date_time - item.start_date_time;
+
+                        var actualHours = diff.TotalHours;
+                    }
+
+                    @actualHours.ToString()
+
+                </td>
+                <td class="text-center">
+                    @{
+                        var calculatedHours = actualHours * 2;
+                    }
+
+                    @calculatedHours.ToString()
+
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>
+            </tr>
+            count++;
+        }
+
+    </tbody>
+
+
+</table>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
+
+@if (ViewBag.Alert != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Alert");
+            };
+
+    </script>
+
+}
+
+@section scripts{
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#overtimeTable').DataTable();
+        });
+    </script>
+}

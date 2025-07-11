@@ -10,107 +10,118 @@ using CladSmartTest.DataLayer;
 
 namespace CladSmartTest.Controllers
 {
-    public class DepartmentController : Controller
+    public class OvertimeController : Controller
     {
         private cladsmartEntities db = new cladsmartEntities();
 
-        // GET: Department
+        // GET: Overtime
         public ActionResult Index()
         {
-            return View(db.departments.ToList());
+            var overtimes = db.overtimes.Include(o => o.employee);
+            return View(overtimes.ToList());
         }
 
-        // GET: Department/Details/5
+        // GET: Overtime/Details/5
         public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            department department = db.departments.Find(id);
-            if (department == null)
+            overtime overtime = db.overtimes.Find(id);
+            if (overtime == null)
             {
                 return HttpNotFound();
             }
-            return View(department);
+            return View(overtime);
         }
 
-        // GET: Department/Create
+        // GET: Overtime/Create
         public ActionResult Create()
         {
+            ViewBag.employee_nik = new SelectList(db.employees, "nik", "name");
             return View();
         }
 
-        // POST: Department/Create
+        // POST: Overtime/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,department_name")] department department)
+        public ActionResult Create([Bind(Include = "id,employee_nik,start_date_time,end_date_time")] overtime overtime)
         {
+            var diff = overtime.end_date_time - overtime.start_date_time;
+
+            if (diff.TotalHours > 3.00 )
+            {
+                ViewBag.Alert = "Overtime Exceeded Maximum Hours";
+            }
             if (ModelState.IsValid)
             {
-                db.departments.Add(department);
+                db.overtimes.Add(overtime);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(department);
+            ViewBag.employee_nik = new SelectList(db.employees, "nik", "name", overtime.employee_nik);
+            return View(overtime);
         }
 
-        // GET: Department/Edit/5
+        // GET: Overtime/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            department department = db.departments.Find(id);
-            if (department == null)
+            overtime overtime = db.overtimes.Find(id);
+            if (overtime == null)
             {
                 return HttpNotFound();
             }
-            return View(department);
+            ViewBag.employee_nik = new SelectList(db.employees, "nik", "name", overtime.employee_nik);
+            return View(overtime);
         }
 
-        // POST: Department/Edit/5
+        // POST: Overtime/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,department_name")] department department)
+        public ActionResult Edit([Bind(Include = "id,employee_nik,start_date_time,end_date_time")] overtime overtime)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(department).State = EntityState.Modified;
+                db.Entry(overtime).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(department);
+            ViewBag.employee_nik = new SelectList(db.employees, "nik", "name", overtime.employee_nik);
+            return View(overtime);
         }
 
-        // GET: Department/Delete/5
+        // GET: Overtime/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            department department = db.departments.Find(id);
-            if (department == null)
+            overtime overtime = db.overtimes.Find(id);
+            if (overtime == null)
             {
                 return HttpNotFound();
             }
-            return View(department);
+            return View(overtime);
         }
 
-        // POST: Department/Delete/5
+        // POST: Overtime/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            department department = db.departments.Find(id);
-            db.departments.Remove(department);
+            overtime overtime = db.overtimes.Find(id);
+            db.overtimes.Remove(overtime);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -24,6 +24,15 @@
           <Property Name="meal_allowance" Type="bit" />
           <Property Name="laptop_allowance" Type="bit" />
         </EntityType>
+        <EntityType Name="overtime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employee_nik" Type="bigint" Nullable="false" />
+          <Property Name="start_date_time" Type="datetime" Nullable="false" />
+          <Property Name="end_date_time" Type="datetime" Nullable="false" />
+        </EntityType>
         <Association Name="FK_employee_department">
           <End Role="department" Type="Self.department" Multiplicity="1" />
           <End Role="employee" Type="Self.employee" Multiplicity="*" />
@@ -36,12 +45,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_overtime_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="overtime" Type="Self.overtime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="nik" />
+            </Principal>
+            <Dependent Role="overtime">
+              <PropertyRef Name="employee_nik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="cladsmartModelStoreContainer">
           <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="overtime" EntityType="Self.overtime" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_employee_department" Association="Self.FK_employee_department">
             <End Role="department" EntitySet="department" />
             <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_overtime_employee" Association="Self.FK_overtime_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="overtime" EntitySet="overtime" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -69,6 +95,17 @@
           <Property Name="meal_allowance" Type="Boolean" />
           <Property Name="laptop_allowance" Type="Boolean" />
           <NavigationProperty Name="department" Relationship="Self.FK_employee_department" FromRole="employee" ToRole="department" />
+          <NavigationProperty Name="overtimes" Relationship="Self.FK_overtime_employee" FromRole="employee" ToRole="overtime" />
+        </EntityType>
+        <EntityType Name="overtime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employee_nik" Type="Int64" Nullable="false" />
+          <Property Name="start_date_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date_time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_overtime_employee" FromRole="overtime" ToRole="employee" />
         </EntityType>
         <Association Name="FK_employee_department">
           <End Role="department" Type="Self.department" Multiplicity="1" />
@@ -82,12 +119,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_overtime_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="overtime" Type="Self.overtime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="nik" />
+            </Principal>
+            <Dependent Role="overtime">
+              <PropertyRef Name="employee_nik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="cladsmartEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="departments" EntityType="Self.department" />
           <EntitySet Name="employees" EntityType="Self.employee" />
+          <EntitySet Name="overtimes" EntityType="Self.overtime" />
           <AssociationSet Name="FK_employee_department" Association="Self.FK_employee_department">
             <End Role="department" EntitySet="departments" />
             <End Role="employee" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_overtime_employee" Association="Self.FK_overtime_employee">
+            <End Role="employee" EntitySet="employees" />
+            <End Role="overtime" EntitySet="overtimes" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -114,6 +168,16 @@
                 <ScalarProperty Name="bpjs_allowance" ColumnName="bpjs_allowance" />
                 <ScalarProperty Name="meal_allowance" ColumnName="meal_allowance" />
                 <ScalarProperty Name="laptop_allowance" ColumnName="laptop_allowance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="overtimes">
+            <EntityTypeMapping TypeName="cladsmartModel.overtime">
+              <MappingFragment StoreEntitySet="overtime">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="employee_nik" ColumnName="employee_nik" />
+                <ScalarProperty Name="start_date_time" ColumnName="start_date_time" />
+                <ScalarProperty Name="end_date_time" ColumnName="end_date_time" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,14 +14,22 @@ namespace CladSmartTest.DataLayer
     
     public partial class employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public employee()
+        {
+            this.overtimes = new HashSet<overtime>();
+        }
+    
         public long nik { get; set; }
         public string name { get; set; }
         public long department_id { get; set; }
         public string position { get; set; }
-        public Nullable<bool> bpjs_allowance { get; set; }
-        public Nullable<bool> meal_allowance { get; set; }
-        public Nullable<bool> laptop_allowance { get; set; }
+        public bool bpjs_allowance { get; set; }
+        public bool meal_allowance { get; set; }
+        public bool laptop_allowance { get; set; }
     
         public virtual department department { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<overtime> overtimes { get; set; }
     }
 }

@@ -4,10 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="88af4854ab1c434ba7c78ebf3bf71049" Name="Diagram1">
-        <EntityTypeShape EntityType="cladsmartModel.department" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+      <Diagram DiagramId="e6a188e2994d4ab9a3db1ca8a158f2ef" Name="Diagram1">
+        <EntityTypeShape EntityType="cladsmartModel.department" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="cladsmartModel.employee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="cladsmartModel.overtime" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="cladsmartModel.FK_employee_department" ManuallyRouted="false" />
+        <AssociationConnector Association="cladsmartModel.FK_overtime_employee" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

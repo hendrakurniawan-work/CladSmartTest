@@ -2,15 +2,17 @@
 
 @{
     ViewBag.Title = "Create";
+
+
 }
 
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>employee</h4>
         <hr />
@@ -42,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.position, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.position, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("position", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.position, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,7 +53,7 @@
             @Html.LabelFor(model => model.bpjs_allowance, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.bpjs_allowance)
+                    @Html.CheckBoxFor(model => model.bpjs_allowance)
                     @Html.ValidationMessageFor(model => model.bpjs_allowance, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -61,7 +63,7 @@
             @Html.LabelFor(model => model.meal_allowance, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.meal_allowance)
+                    @Html.CheckBoxFor(model => model.meal_allowance)
                     @Html.ValidationMessageFor(model => model.meal_allowance, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -71,7 +73,7 @@
             @Html.LabelFor(model => model.laptop_allowance, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.laptop_allowance)
+                    @Html.CheckBoxFor(model => model.laptop_allowance)
                     @Html.ValidationMessageFor(model => model.laptop_allowance, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -39,6 +40,16 @@ namespace CladSmartTest.Controllers
         // GET: Employee/Create
         public ActionResult Create()
         {
+            List<SelectListItem> positions = new List<SelectListItem>()
+            {
+                new SelectListItem(){ Text = "Operator", Value= "Operator"},
+                new SelectListItem(){ Text = "Technician", Value= "Technician"},
+                new SelectListItem(){ Text = "Leader", Value= "Leader"},
+                new SelectListItem(){ Text = "Supervisor", Value= "Supervisor"},
+                new SelectListItem(){ Text = "Manager", Value= "Manager"},
+            };
+
+            ViewBag.position = new SelectList(positions,"Value", "Text");
             ViewBag.department_id = new SelectList(db.departments, "id", "department_name");
             return View();
         }
@@ -50,12 +61,17 @@ namespace CladSmartTest.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "nik,name,department_id,position,bpjs_allowance,meal_allowance,laptop_allowance")] employee employee)
         {
-            if (ModelState.IsValid)
+            bool idExist = db.employees.Any(emp => emp.nik.Equals(employee.nik));
+            if (idExist)
+            {
+                ViewBag.Alert = "Exception: NIK already exists in database.";
+            }
+            if (ModelState.IsValid && !idExist)
             {
                 db.employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            } 
 
             ViewBag.department_id = new SelectList(db.departments, "id", "department_name", employee.department_id);
             return View(employee);

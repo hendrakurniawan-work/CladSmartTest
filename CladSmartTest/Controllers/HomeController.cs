@@ -14,15 +14,5 @@ namespace CladSmartTest.Controllers
         {
             return View();
         }
-
-        public ActionResult About()
-        {
-            return View();
-        }
-
-        public ActionResult Employee()
-        {
-            return View();
-        }
     }
 }
