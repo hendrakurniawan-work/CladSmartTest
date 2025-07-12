@@ -52,11 +52,16 @@ namespace CladSmartTest.Controllers
         {
             var diff = overtime.end_date_time - overtime.start_date_time;
 
+            if (diff.TotalHours < 0.00)
+            {
+                ViewBag.Alert = "Finish Time Overlapped Start Time";
+            }
+
             if (diff.TotalHours > 3.00 )
             {
                 ViewBag.Alert = "Overtime Exceeded Maximum Hours";
             }
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && diff.TotalHours <= 3.00 && diff.TotalHours > 0.00)
             {
                 db.overtimes.Add(overtime);
                 db.SaveChanges();
@@ -70,11 +75,14 @@ namespace CladSmartTest.Controllers
         // GET: Overtime/Edit/5
         public ActionResult Edit(long? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             overtime overtime = db.overtimes.Find(id);
+
+
             if (overtime == null)
             {
                 return HttpNotFound();
@@ -90,7 +98,19 @@ namespace CladSmartTest.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,employee_nik,start_date_time,end_date_time")] overtime overtime)
         {
-            if (ModelState.IsValid)
+
+            var diff = overtime.end_date_time - overtime.start_date_time;
+
+            if (diff.TotalHours < 0.00)
+            {
+                ViewBag.Alert = "Finish Time Overlapped Start Time";
+            }
+
+            if (diff.TotalHours > 3.00)
+            {
+                ViewBag.Alert = "Overtime Exceeded Maximum Hours";
+            }
+            if (ModelState.IsValid && diff.TotalHours <= 3.00 && diff.TotalHours > 0.00)
             {
                 db.Entry(overtime).State = EntityState.Modified;
                 db.SaveChanges();

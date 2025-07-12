@@ -141,9 +141,19 @@ namespace CladSmartTest.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             employee employee = db.employees.Find(id);
+      
             if (employee == null)
             {
                 return HttpNotFound();
+            }
+
+            var overtimes = db.overtimes.Include(o => o.employee);
+
+            bool overtimeExist = overtimes.ToList().Find(o => o.employee_nik == id) != null;
+
+            if(overtimeExist)
+            {
+                ViewBag.Alert = "Employee Has Overtime Data";
             }
             return View(employee);
         }
@@ -153,6 +163,14 @@ namespace CladSmartTest.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
+            var overtimes = db.overtimes.Include(o => o.employee);
+
+            bool overtimeExist = overtimes.ToList().Find(o => o.employee_nik == id) != null;
+
+            if (overtimeExist)
+            {
+                return RedirectToAction("Index");
+            }
             employee employee = db.employees.Find(id);
             db.employees.Remove(employee);
             db.SaveChanges();
