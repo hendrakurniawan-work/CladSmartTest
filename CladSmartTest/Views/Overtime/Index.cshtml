@@ -7,7 +7,7 @@
 <h2>LIST OF THE OVER TIME DATA</h2>
 
 <p class="d-flex justify-content-end">
-    @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-primary " })
+    @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-outline-primary " })
 </p>
 <table id="overtimeTable" class="display table-bordered text-center">
     <thead>
@@ -49,10 +49,10 @@
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.employee.nik)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.start_date_time)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.end_date_time)
                 </td>
                 <td class="text-center">
@@ -75,8 +75,8 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-primary " }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-primary " })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-outline-primary " }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-outline-danger " })
                 </td>
             </tr>
             count++;

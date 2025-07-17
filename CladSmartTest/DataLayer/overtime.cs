@@ -19,9 +19,11 @@ namespace CladSmartTest.DataLayer
         public long employee_nik { get; set; }
 
         [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}")]
         public DateTime start_date_time { get; set; }
 
         [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}")]
         public DateTime end_date_time { get; set; }
     
         public virtual employee employee { get; set; }
